@@ -1,3 +1,4 @@
+import { useState, useEffect} from 'react';
 import {Box, Button, Text, TextField, Image} from '@skynexui/components';
 import appConfig from '../config.json';
 
@@ -69,6 +70,11 @@ function Titulo(props) {
 
 export default function PaginaInicial() {
   const username = 'natalia-fs';
+  const [videoBackgroundSrc, setVideoBackgroundSrc] = useState("");
+
+  useEffect(() => {
+    setVideoBackgroundSrc(appConfig.theme.backgrounds[Math.floor(Math.random() * 4)]);
+  }, []);
 
   return (
     <>
@@ -76,7 +82,8 @@ export default function PaginaInicial() {
       <div className="video-container">
         <video
           className="video-content"
-          src={appConfig.theme.backgrounds[Math.floor(Math.random() * 4)]}
+          src={videoBackgroundSrc}
+          // src={appConfig.theme.backgrounds[Math.floor(Math.random() * 4)]}
           autoPlay muted loop
         ></video>
         <style jsx>{`
