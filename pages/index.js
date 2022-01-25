@@ -1,43 +1,7 @@
 import { useState, useEffect} from 'react';
+import { useRouter } from 'next/router';
 import {Box, Button, Text, TextField, Image} from '@skynexui/components';
 import appConfig from '../config.json';
-
-function GlobalStyle() {
-  return (
-    <style global jsx>{`
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        list-style: none;
-        transition: background-image .4s;
-    }
-    body {
-      font-family: 'Open Sans', sans-serif;
-    }
-    /* App fit Height */ 
-    html, body, #__next {
-      min-height: 100vh;
-      display: flex;
-      flex: 1;
-    }
-    #__next {
-      flex: 1;
-    }
-    #__next > * {
-      flex: 1;
-    }
-    /* ./App fit Height */
-    ::selection {
-      color: ${appConfig.theme.colors.neutrals['800']};
-      background: ${appConfig.theme.colors.primary['500']};
-    }
-    input{
-      caret-color: ${appConfig.theme.colors.primary['500']};
-    }
-    `}</style>
-  )
-}
 
 function Titulo(props) {
   const Tag = props.tag || 'h1';
@@ -69,16 +33,26 @@ function Titulo(props) {
 // export default HomePage
 
 export default function PaginaInicial() {
-  const username = 'natalia-fs';
+  // const username = 'natalia-fs';
   const [videoBackgroundSrc, setVideoBackgroundSrc] = useState("");
+  const [username, setUsername] = useState("natalia-fs");
+  const router = useRouter();
 
   useEffect(() => {
     setVideoBackgroundSrc(appConfig.theme.backgrounds[Math.floor(Math.random() * 4)]);
   }, []);
 
+  function handleChangeUsername(event){
+    let value = event.target.value;
+    setUsername(value);
+  }
+  function handleSubmit(event) {
+    event.preventDefault();
+    router.push('/chat');
+  }
+
   return (
     <>
-      <GlobalStyle />
       <div className="video-container">
         <video
           className="video-content"
@@ -138,6 +112,7 @@ export default function PaginaInicial() {
           {/* Formulário */}
           <Box
             as="form"
+            onSubmit={handleSubmit}
             styleSheet={{
               display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
               width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
@@ -149,7 +124,10 @@ export default function PaginaInicial() {
             </Text>
 
             <TextField
+              value={username}
+              onChange={handleChangeUsername}
               autoComplete="off"
+              placeholder="Digite seu username do Github"
               fullWidth
               textFieldColors={{
                 neutral: {
@@ -191,13 +169,15 @@ export default function PaginaInicial() {
               minHeight: '240px',
             }}
           >
-            <Image
-              styleSheet={{
-                borderRadius: '50%',
-                marginBottom: '16px',
-              }}
-              src={`https://github.com/${username}.png`}
-            />
+            {username.length>1 && (
+              <Image
+                styleSheet={{
+                  borderRadius: '50%',
+                  marginBottom: '16px',
+                }}
+                src={`https://github.com/${username}.png`}
+              />
+            )}
             <Text
               variant="body4"
               styleSheet={{
@@ -207,7 +187,7 @@ export default function PaginaInicial() {
                 borderRadius: '1000px'
               }}
             >
-              {username}
+              {username.length>1 ? username : "Digite um username"}
             </Text>
           </Box>
           {/* Photo Area */}
