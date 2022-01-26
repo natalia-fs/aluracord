@@ -27,7 +27,8 @@
         "800": "#181F25",
         "900": "#101418",
         "999": "#080A0C",
-        "opacity": "#101418e9"
+        "opacity": "#101418e9",
+        "opacity-2": "#29333Db0"
       }
     },
     "backgroundMobile": "./assets/mobile.jpg",

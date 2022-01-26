@@ -49,24 +49,20 @@ export default function ChatPage() {
             display: 'flex',
             flex: 1,
             height: '80%',
-            backgroundColor: appConfig.theme.colors.neutrals[600],
+            backgroundColor: appConfig.theme.colors.neutrals['opacity-2'],
             flexDirection: 'column',
-            borderRadius: '5px',
-            padding: '16px',
+            borderRadius: '4px',
+            padding: '12px',
           }}
         >
 
           <MessageList mensagens={mensagens} />
-          {/* {mensagens.map((mensagemAtual)=>{
-            return (<li key={mensagemAtual.id}>
-              {mensagemAtual.de}: {mensagemAtual.texto}
-            </li>)
-          })} */}
+
           <Box
             as="form"
             styleSheet={{
               display: 'flex',
-              alignItems: 'center',
+              alignItems: 'flex-start',
             }}
           >
             <TextField
@@ -77,7 +73,8 @@ export default function ChatPage() {
               onKeyPress={(event) => {
                 if (event.key === 'Enter') {
                   event.preventDefault();
-                  handleNovaMensagem(mensagem)
+                  if(mensagem.trim() !== '') handleNovaMensagem(mensagem)
+                  else setMensagem('');
                 }
               }}
 
@@ -92,6 +89,21 @@ export default function ChatPage() {
                 backgroundColor: appConfig.theme.colors.neutrals[800],
                 marginRight: '12px',
                 color: appConfig.theme.colors.neutrals[200],
+              }}
+            />
+            <Button
+              disabled={!mensagem}
+              onClick={() => {
+                if(mensagem.trim() !== '') handleNovaMensagem(mensagem)
+                else setMensagem('');
+              }}
+              iconName="paperPlane"
+              rounded="none"
+              buttonColors={{
+                contrastColor: `${appConfig.theme.colors.primary[500]}`,
+                mainColor: `${appConfig.theme.colors.neutrals[800]}`,
+                mainColorLight: `${appConfig.theme.colors.neutrals[600]}`,
+                mainColorStrong: `${appConfig.theme.colors.neutrals[900]}`
               }}
             />
           </Box>
@@ -142,10 +154,10 @@ function MessageList(props) {
               styleSheet={{
                 borderRadius: '5px',
                 padding: '6px',
-                marginBottom: '12px',
+                marginBottom: '4px',
                 marginRight: '8px',
                 hover: {
-                  backgroundColor: appConfig.theme.colors.neutrals[700],
+                  backgroundColor: appConfig.theme.colors.neutrals[800],
                 }
               }}
             >
@@ -167,7 +179,20 @@ function MessageList(props) {
                   src={`https://github.com/${mensagem.de}.png`}
                 />
                 <Text tag="strong">
-                  {mensagem.de}
+                  <Text
+                    tag="a"
+                    href={`https://github.com/${mensagem.de}.png`}
+                    target='_blank'
+                    styleSheet={{
+                      color: appConfig.theme.colors.neutrals[200],
+                      textDecoration: 'none',
+                      hover: {
+                        color: appConfig.theme.colors.primary[500],
+                      }
+                    }}
+                  >
+                    {mensagem.de}
+                  </Text>
                 </Text>
                 <Text
                   styleSheet={{
