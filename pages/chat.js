@@ -154,7 +154,6 @@ function MessageList(props) {
                   marginBottom: '8px',
                   display: 'flex',
                   alignItems: 'center',
-                  
                 }}
               >
                 <Image
@@ -181,7 +180,13 @@ function MessageList(props) {
                   {mensagem.horario}
                 </Text>
               </Box>
-              {mensagem.texto}
+              <Text
+                styleSheet={{
+                  fontSize: '14px',
+                }}
+              >
+                {mensagem.texto}
+              </Text>
             </Text>
           )
         })

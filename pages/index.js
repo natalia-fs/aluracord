@@ -19,19 +19,6 @@ function Titulo(props) {
   );
 }
 
-// function HomePage() {
-//   // JSX
-//   return (
-//     <div>
-//       <GlobalStyle />
-//       <Titulo tag="h4">TEstezinho da massa</Titulo>
-//       <h2>Discord - Alura</h2>
-//     </div>
-//   )
-// }
-
-// export default HomePage
-
 export default function PaginaInicial() {
   // const username = 'natalia-fs';
   const [videoBackgroundSrc, setVideoBackgroundSrc] = useState("");
@@ -174,17 +161,26 @@ export default function PaginaInicial() {
                 styleSheet={{
                   borderRadius: '50%',
                   marginBottom: '16px',
+                  transition: '.2s',
+                  hover: {
+                    borderRadius: '5%'
+
+                  }
                 }}
                 src={`https://github.com/${username}.png`}
               />
             )}
             <Text
+              tag="a"
+              href={`https://github.com/${username}`}
+              target="_blank"
               variant="body4"
               styleSheet={{
                 color: appConfig.theme.colors.neutrals[200],
                 backgroundColor: appConfig.theme.colors.neutrals[900],
-                padding: '3px 10px',
-                borderRadius: '1000px'
+                padding: '4px 12px',
+                borderRadius: '1000px',
+                textDecoration: 'none'
               }}
             >
               {username.length>1 ? username : "Digite um username"}
