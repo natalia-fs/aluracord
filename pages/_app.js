@@ -30,8 +30,19 @@ function GlobalStyle() {
       color: ${appConfig.theme.colors.neutrals['800']};
       background: ${appConfig.theme.colors.primary['500']};
     }
-    input{
+    input, textarea{
       caret-color: ${appConfig.theme.colors.primary['500']};
+    }
+    ul.sknui-ul::-webkit-scrollbar{
+      width: 10px;
+    }
+    ul.sknui-ul::-webkit-scrollbar-track{
+      background: ${appConfig.theme.colors.neutrals['800']}; 
+      border-radius: 4px;
+    }
+    ul.sknui-ul::-webkit-scrollbar-thumb{
+      background: ${appConfig.theme.colors.primary['500']};
+      border-radius: 4px; 
     }
     `}</style>
   )
