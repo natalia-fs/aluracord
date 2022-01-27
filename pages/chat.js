@@ -1,20 +1,49 @@
 import { Box, Text, TextField, Image, Button } from '@skynexui/components';
 import { useState, useEffect } from 'react';
 import appConfig from '../config.json';
+import {createClient} from '@supabase/supabase-js';
+import Cookies from 'js-cookie';
+
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMxOTAyMywiZXhwIjoxOTU4ODk1MDIzfQ.uFTAB1unpGk4H2Ewt-7FY7wIng5b2zn92e_oLlOrS3g';
+const SUPABASE_URL = 'https://awluzorjptjiwqjmcucq.supabase.co';
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 export default function ChatPage() {
-
+  const [username, setUsername] = useState(Cookies.get('arcanecord_username') || 'natalia-fs');
   const [mensagem, setMensagem] = useState("");
   const [mensagens, setMensagens] = useState([]);
   
+  useEffect(() => {
+    supabaseClient
+      .from('mensagens')
+      .select('*')
+      .order('id', {ascending: false})
+      .then(({data, error}) => {
+        setMensagens(data)
+        if(error) console.error(error);
+      });
+  }, [])
+  
   function handleNovaMensagem(novaMensagem) {
     const mensagem = {
-      id: (new Date()).getTime(),
-      de: 'natalia-fs',
-      horario: (new Date().toLocaleString()),
+      // id: (new Date()).getTime(),
+      // horario: (new Date().toLocaleString()),
+      de: username,
       texto: novaMensagem,
     }
-    setMensagens([mensagem, ...mensagens,]);
+    supabaseClient
+      .from('mensagens')
+      .insert([
+        mensagem
+      ])
+      .then(({data})=>{
+        console.log('Insert:', data);
+        setMensagens([
+          data[0],
+          ...mensagens
+        ])
+      })
+    // setMensagens([mensagem, ...mensagens,]);
     setMensagem('');
   }
   
@@ -42,7 +71,7 @@ export default function ChatPage() {
           padding: '32px',
         }}
       >
-        <Header />
+        <Header username={username} />
         <Box
           styleSheet={{
             position: 'relative',
@@ -90,6 +119,14 @@ export default function ChatPage() {
                 marginRight: '12px',
                 color: appConfig.theme.colors.neutrals[200],
               }}
+              textFieldColors={{
+                neutral: {
+                  textColor: appConfig.theme.colors.neutrals[200],
+                  mainColor: appConfig.theme.colors.primary[900],
+                  mainColorHighlight: appConfig.theme.colors.primary[500],
+                  backgroundColor: appConfig.theme.colors.neutrals[800],
+                },
+              }}
             />
             <Button
               disabled={!mensagem}
@@ -113,19 +150,36 @@ export default function ChatPage() {
   )
 }
 
-function Header() {
+function Header({username}) {
   return (
     <>
       <Box styleSheet={{ width: '100%', marginBottom: '16px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }} >
         <Text variant='heading5'>
-          Chat
+          ArcaneCord - Chat
         </Text>
-        <Button
-          variant='tertiary'
-          colorVariant='neutral'
-          label='Logout'
-          href="/"
-        />
+        <Box styleSheet={{display: 'flex', alignItems: 'center'}}>
+          <Image
+            src={`https://github.com/${username}.png`}
+            styleSheet={{
+              width: '30px',
+              height: '30px',
+              borderRadius: '50%',
+              display: 'inline-block',
+              marginRight: '8px',
+              transition: 'ease .2s',
+              hover: {
+                width: '36px',
+                height: '36px'
+              }
+            }}
+          />
+          <Button
+            variant='tertiary'
+            colorVariant='neutral'
+            label='Logout'
+            href="/"
+          />
+        </Box>
       </Box>
     </>
   )
@@ -202,7 +256,7 @@ function MessageList(props) {
                   }}
                   tag="span"
                 >
-                  {mensagem.horario}
+                  {new Date(mensagem.created_at).toLocaleString('pt-BR', {dateStyle: 'short',timeStyle: 'short'})}
                 </Text>
               </Box>
               <Text

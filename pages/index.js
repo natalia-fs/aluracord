@@ -1,6 +1,7 @@
 import { useState, useEffect} from 'react';
 import { useRouter } from 'next/router';
 import {Box, Button, Text, TextField, Image} from '@skynexui/components';
+import Cookies from 'js-cookie';
 import appConfig from '../config.json';
 
 function Titulo(props) {
@@ -22,7 +23,7 @@ function Titulo(props) {
 export default function PaginaInicial() {
   // const username = 'natalia-fs';
   const [videoBackgroundSrc, setVideoBackgroundSrc] = useState("");
-  const [username, setUsername] = useState("natalia-fs");
+  const [username, setUsername] = useState(Cookies.get('arcanecord_username') || 'natalia-fs');
   const router = useRouter();
 
   useEffect(() => {
@@ -35,6 +36,7 @@ export default function PaginaInicial() {
   }
   function handleSubmit(event) {
     event.preventDefault();
+    Cookies.set('arcanecord_username', username);
     router.push('/chat');
   }
 
