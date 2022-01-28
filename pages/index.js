@@ -75,7 +75,7 @@ export default function PaginaInicial() {
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           // backgroundColor: `{appConfig.theme.colors.neutrals['opacity']}`,
           backgroundImage: {
-            xs: `url(${appConfig.theme.backgroundMobile}), radial-gradient(transparent 5%, ${appConfig.theme.colors.neutrals[900]} 75%)`,
+            xs: `url(${appConfig.theme.backgroundMobile2}), radial-gradient(transparent 5%, ${appConfig.theme.colors.neutrals[900]} 75%)`,
             md:`radial-gradient(transparent 5%, ${appConfig.theme.colors.neutrals[900]} 75%)`
           },
           // backgroundImage: 'url(https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/39487e103630221.5f510ae93e47f.gif)',

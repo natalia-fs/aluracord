@@ -32,6 +32,7 @@
       }
     },
     "backgroundMobile": "./assets/mobile.jpg",
+    "backgroundMobile2": "./assets/mobile2.jpeg",
     "backgroundDesktop": "./assets/desktop.jpg",
     "backgrounds": [
       "../assets/arcane-01.mp4",
