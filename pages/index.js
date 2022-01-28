@@ -142,6 +142,7 @@ export default function PaginaInicial() {
               }}
             />
             <Button
+              disabled={username.length<2}
               type='submit'
               label='Entrar'
               fullWidth
