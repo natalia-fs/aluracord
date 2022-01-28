@@ -90,7 +90,7 @@ export function ButtonSendSticker(props) {
                   }
                 }}
               >
-                <Image src={sticker} />
+                <Image styleSheet={{cursor: 'pointer'}} src={sticker} />
               </Text>
             ))}
           </Box>

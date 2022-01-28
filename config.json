@@ -44,6 +44,20 @@
     ]
   },
   "stickers": [
+    "../assets/stickers/sticker-001.png",
+    "../assets/stickers/sticker-002.png",
+    "../assets/stickers/sticker-003.png",
+    "../assets/stickers/sticker-004.png",
+    "../assets/stickers/sticker-005.png",
+    "../assets/stickers/sticker-006.png",
+    "../assets/stickers/sticker-007.png",
+    "../assets/stickers/sticker-008.png",
+    "../assets/stickers/sticker-009.png",
+    "../assets/stickers/sticker-010.png",
+    "../assets/stickers/sticker-011.png",
+    "../assets/stickers/sticker-012.png"
+  ],
+  "stickersAlura": [
     "https://www.alura.com.br/imersao-react-4/assets/figurinhas/Figurinha_1.png",
     "https://www.alura.com.br/imersao-react-4/assets/figurinhas/Figurinha_2.png",
     "https://www.alura.com.br/imersao-react-4/assets/figurinhas/Figurinha_3.png",
