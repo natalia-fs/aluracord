@@ -115,7 +115,12 @@ export default function PaginaInicial() {
               styleSheet={{
                 margin: '1rem .5rem 2rem .5rem',
                 width: '60%',
-                filter: `drop-shadow(1px 1px 11px ${appConfig.theme.colors.primary[200]})`
+                filter: `drop-shadow(1px 1px 11px ${appConfig.theme.colors.primary[200]})`,
+                transition: 'ease-in .4s',
+                hover: {
+                  filter: `drop-shadow(1px 1px 11px ${appConfig.theme.colors.primary[400]})`,
+                  transform: 'scale(1.1)'
+                }
                 }
               }
               src="./arcanecord.png"
@@ -129,7 +134,7 @@ export default function PaginaInicial() {
               fullWidth
               textFieldColors={{
                 neutral: {
-                  textColor: appConfig.theme.colors.neutrals[200],
+                  textColor: appConfig.theme.colors.primary[300],
                   mainColor: appConfig.theme.colors.primary[900],
                   mainColorHighlight: appConfig.theme.colors.primary[500],
                   backgroundColor: appConfig.theme.colors.neutrals[800],
@@ -191,7 +196,11 @@ export default function PaginaInicial() {
                 backgroundColor: appConfig.theme.colors.neutrals[900],
                 padding: '4px 12px',
                 borderRadius: '1000px',
-                textDecoration: 'none'
+                textDecoration: 'none',
+                transition: 'ease .2s',
+                hover: {
+                  color: appConfig.theme.colors.primary[500]
+                }
               }}
             >
               {username.length>1 ? username : "Digite um username"}
