@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import appConfig from '../config.json';
 import {createClient} from '@supabase/supabase-js';
 import Cookies from 'js-cookie';
+import { ButtonSendSticker } from '../src/components/ButtonSendSticker'
 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMxOTAyMywiZXhwIjoxOTU4ODk1MDIzfQ.uFTAB1unpGk4H2Ewt-7FY7wIng5b2zn92e_oLlOrS3g';
 const SUPABASE_URL = 'https://awluzorjptjiwqjmcucq.supabase.co';
@@ -117,7 +118,7 @@ export default function ChatPage() {
                 padding: '6px 8px',
                 backgroundColor: appConfig.theme.colors.neutrals[800],
                 marginRight: '12px',
-                color: appConfig.theme.colors.neutrals[200],
+                color: appConfig.theme.colors.primary[300],
               }}
               textFieldColors={{
                 neutral: {
@@ -128,8 +129,13 @@ export default function ChatPage() {
                 },
               }}
             />
+            <ButtonSendSticker
+              onStickerClick={(sticker) => {
+                handleNovaMensagem(`:sticker: ${sticker}`)
+              }}
+            /> 
             <Button
-              disabled={!mensagem}
+              // disabled={!mensagem}
               onClick={() => {
                 if(mensagem.trim() !== '') handleNovaMensagem(mensagem)
                 else setMensagem('');
@@ -141,6 +147,16 @@ export default function ChatPage() {
                 mainColor: `${appConfig.theme.colors.neutrals[800]}`,
                 mainColorLight: `${appConfig.theme.colors.neutrals[600]}`,
                 mainColorStrong: `${appConfig.theme.colors.neutrals[900]}`
+              }}
+              styleSheet={{
+                borderRadius: '50%',
+                padding: '0 3px 0 0',
+                minWidth: '50px',
+                minHeight: '50px',
+                fontSize: '20px',
+                margin: '0 8px',
+                lineHeight: '0',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
               }}
             />
           </Box>
@@ -264,7 +280,9 @@ function MessageList(props) {
                   fontSize: '14px',
                 }}
               >
-                {mensagem.texto}
+                {mensagem.texto.startsWith(':sticker:')
+                  ? (<Image styleSheet={{maxWidth: '7rem'}} src={mensagem.texto.replace(':sticker:','')} />)
+                  : (mensagem.texto) }
               </Text>
             </Text>
           )
