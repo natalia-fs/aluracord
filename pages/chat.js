@@ -9,6 +9,13 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5v
 const SUPABASE_URL = 'https://awluzorjptjiwqjmcucq.supabase.co';
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
+function escutaMensagensEmTempoReal(addMensagem){
+  return supabaseClient.from('mensagens')
+  .on('INSERT', (response) => {
+    addMensagem(response.new);
+  }).subscribe()
+}
+
 export default function ChatPage() {
   const username = Cookies.get('arcanecord_username') || 'natalia-fs';
   const [mensagem, setMensagem] = useState("");
@@ -16,14 +23,23 @@ export default function ChatPage() {
   
   useEffect(() => {
     supabaseClient
-      .from('mensagens')
-      .select('*')
-      .order('id', {ascending: false})
-      .then(({data, error}) => {
-        setMensagens(data)
-        if(error) console.error(error);
-      });
-  }, [])
+    .from('mensagens')
+    .select('*')
+    .order('id', {ascending: false})
+    .then(({data, error}) => {
+      setMensagens(data)
+      if(error) console.error(error);
+    });
+
+    escutaMensagensEmTempoReal((novaMensagem) => {
+      setMensagens((valorAtualizado) => {
+        return [
+          novaMensagem,
+          ...valorAtualizado
+        ]}
+      )
+    })
+  }, []);
   
   function handleNovaMensagem(novaMensagem) {
     const mensagem = {
@@ -38,11 +54,7 @@ export default function ChatPage() {
         mensagem
       ])
       .then(({data})=>{
-        console.log('Insert:', data);
-        setMensagens([
-          data[0],
-          ...mensagens
-        ])
+        console.log(data);
       })
     // setMensagens([mensagem, ...mensagens,]);
     setMensagem('');
