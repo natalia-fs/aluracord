@@ -23,7 +23,7 @@ function Titulo(props) {
 export default function PaginaInicial() {
   // const username = 'natalia-fs';
   const [videoBackgroundSrc, setVideoBackgroundSrc] = useState("");
-  const [username, setUsername] = useState(Cookies.get('arcanecord_username') || 'natalia-fs');
+  const [username, setUsername] = useState('natalia-fs');
   const router = useRouter();
 
   useEffect(() => {
@@ -107,7 +107,7 @@ export default function PaginaInicial() {
               width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
             }}
           >
-            <Titulo tag="h2">Boas-vindas de volta, {username}!</Titulo>
+            <Titulo tag="h2">Boas-vindas de volta!</Titulo>
             {/* <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
               {appConfig.name}
             </Text> */}

@@ -9,11 +9,18 @@ const SUPABASE_URL = 'https://awluzorjptjiwqjmcucq.supabase.co';
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 export default function ChatPage() {
-  const [username, setUsername] = useState(Cookies.get('arcanecord_username') || 'natalia-fs');
+  const [username, setUsername] = useState("");
   const [mensagem, setMensagem] = useState("");
   const [mensagens, setMensagens] = useState([]);
   
   useEffect(() => {
+    try{
+      let name = Cookies.get('arcanecord_username')
+      if(name) setUsername(name)
+      else setUsername('Guest User')
+    }catch(error){
+      console.log(error);
+    }
     supabaseClient
       .from('mensagens')
       .select('*')
