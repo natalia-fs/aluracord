@@ -107,10 +107,19 @@ export default function PaginaInicial() {
               width: { xs: '100%', sm: '50%' }, textAlign: 'center', marginBottom: '32px',
             }}
           >
-            <Titulo tag="h2">Boas vindas de volta!</Titulo>
-            <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
+            <Titulo tag="h2">Boas-vindas de volta, {username}!</Titulo>
+            {/* <Text variant="body3" styleSheet={{ marginBottom: '32px', color: appConfig.theme.colors.neutrals[300] }}>
               {appConfig.name}
-            </Text>
+            </Text> */}
+            <Image
+              styleSheet={{
+                margin: '1rem .5rem 2rem .5rem',
+                width: '60%',
+                filter: `drop-shadow(1px 1px 11px ${appConfig.theme.colors.primary[200]})`
+                }
+              }
+              src="./arcanecord.png"
+            />
 
             <TextField
               value={username}
@@ -162,11 +171,11 @@ export default function PaginaInicial() {
               <Image
                 styleSheet={{
                   borderRadius: '50%',
+                  border: `2px solid ${appConfig.theme.colors.primary[200]}`,
                   marginBottom: '16px',
                   transition: '.2s',
                   hover: {
                     borderRadius: '5%'
-
                   }
                 }}
                 src={`https://github.com/${username}.png`}
