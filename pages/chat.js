@@ -31,7 +31,7 @@ export default function ChatPage() {
       if(error) console.error(error);
     });
 
-    escutaMensagensEmTempoReal((novaMensagem) => {
+    const subscription = escutaMensagensEmTempoReal((novaMensagem) => {
       setMensagens((valorAtualizado) => {
         return [
           novaMensagem,
@@ -39,6 +39,11 @@ export default function ChatPage() {
         ]}
       )
     })
+
+    return () => {
+      subscription.unsubscribe();
+    }
+    
   }, []);
   
   function handleNovaMensagem(novaMensagem) {
