@@ -43,6 +43,7 @@
 
     ]
   },
+  "loader": "../loader.png",
   "stickers": [
     "../assets/stickers/sticker-001.png",
     "../assets/stickers/sticker-002.png",
@@ -55,7 +56,8 @@
     "../assets/stickers/sticker-009.png",
     "../assets/stickers/sticker-010.png",
     "../assets/stickers/sticker-011.png",
-    "../assets/stickers/sticker-012.png"
+    "../assets/stickers/sticker-012.png",
+    "../assets/stickers/sticker-013.png"
   ],
   "stickersAlura": [
     "https://www.alura.com.br/imersao-react-4/assets/figurinhas/Figurinha_1.png",

@@ -4,6 +4,7 @@ import appConfig from '../config.json';
 import {createClient} from '@supabase/supabase-js';
 import Cookies from 'js-cookie';
 import { ButtonSendSticker } from '../src/components/ButtonSendSticker'
+import {Loading} from '../src/components/Loading'
 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMxOTAyMywiZXhwIjoxOTU4ODk1MDIzfQ.uFTAB1unpGk4H2Ewt-7FY7wIng5b2zn92e_oLlOrS3g';
 const SUPABASE_URL = 'https://awluzorjptjiwqjmcucq.supabase.co';
@@ -102,8 +103,10 @@ export default function ChatPage() {
             padding: '12px',
           }}
         >
-
-          <MessageList mensagens={mensagens} />
+          { mensagens.length == 0
+            ? (<Loading />)
+            : (<MessageList mensagens={mensagens} />)
+          }
 
           <Box
             as="form"

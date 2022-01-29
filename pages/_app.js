@@ -45,6 +45,12 @@ function GlobalStyle() {
       background: ${appConfig.theme.colors.primary['500']};
       border-radius: 4px; 
     }
+    @keyframes spinner { 
+      100% { 
+        transform:rotate(360deg) scale(1.2);
+        -webkit-transform: rotate(360deg) scale(1.2); 
+      } 
+    }
     `}</style>
   )
 }
