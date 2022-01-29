@@ -253,6 +253,7 @@ function MessageList(props) {
                   marginBottom: '8px',
                   display: 'flex',
                   alignItems: 'center',
+                  maxWidth: '80vw'
                 }}
               >
                 <Image
@@ -295,6 +296,7 @@ function MessageList(props) {
               <Text
                 styleSheet={{
                   fontSize: '14px',
+                  wordBreak: 'break-word'
                 }}
               >
                 {mensagem.texto.startsWith(':sticker:')
