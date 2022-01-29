@@ -105,7 +105,7 @@ export default function ChatPage() {
         >
           { mensagens.length == 0
             ? (<Loading />)
-            : (<MessageList mensagens={mensagens} />)
+            : (<MessageList mensagens={mensagens} username={username} />)
           }
 
           <Box
@@ -242,6 +242,8 @@ function MessageList(props) {
               key={mensagem.id}
               tag="li"
               styleSheet={{
+                display: 'flex', flexDirection: 'column',
+                alignItems: mensagem.de == props.username ? 'flex-end' : 'flex-start',
                 borderRadius: '5px',
                 padding: '6px',
                 marginBottom: '4px',
