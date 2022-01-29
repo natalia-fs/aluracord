@@ -152,7 +152,7 @@ export default function ChatPage() {
               }}
             /> 
             <Button
-              // disabled={!mensagem}
+              disabled={!mensagem}
               onClick={() => {
                 if(mensagem.trim() !== '') handleNovaMensagem(mensagem)
                 else setMensagem('');
@@ -269,7 +269,7 @@ function MessageList(props) {
                 <Text tag="strong">
                   <Text
                     tag="a"
-                    href={`https://github.com/${mensagem.de}.png`}
+                    href={`https://github.com/${mensagem.de}`}
                     target='_blank'
                     styleSheet={{
                       color: appConfig.theme.colors.neutrals[200],
