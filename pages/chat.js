@@ -6,8 +6,8 @@ import Cookies from 'js-cookie';
 import { ButtonSendSticker } from '../src/components/ButtonSendSticker'
 import {Loading} from '../src/components/Loading'
 
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MzMxOTAyMywiZXhwIjoxOTU4ODk1MDIzfQ.uFTAB1unpGk4H2Ewt-7FY7wIng5b2zn92e_oLlOrS3g';
-const SUPABASE_URL = 'https://awluzorjptjiwqjmcucq.supabase.co';
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_KEY;
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 function escutaMensagensEmTempoReal(addMensagem){
